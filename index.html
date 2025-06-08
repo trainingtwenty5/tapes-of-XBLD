@@ -531,9 +531,66 @@
   }
 </style>
 
+<!-- Mailchimp + Popup -->
+<link href="https://cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+
+<style>
+  #mc_modal_overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #mc_embed_signup {
+    background: #fff;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    position: relative;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  #mc_close_popup {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+  }
+
+  #mc_embed_signup h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .mc-description {
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  #mc_success_message {
+    display: none;
+    color: green;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+</style>
+
+<!-- POPUP MODAL -->
 <div id="mc_modal_overlay">
   <div id="mc_embed_signup">
-    <button id="mc_close_popup">&times;</button>
+    <button id="mc_close_popup" aria-label="Close popup">&times;</button>
     <h2>Join and get a bonus! 🎁</h2>
     <div class="mc-description">
       Want a <strong>discount code</strong> and a chance to get <strong>free course access</strong>?  
@@ -552,51 +609,40 @@
   </div>
 </div>
 
-<!-- FORM BEZ REDIRECTU, Z ZAPISEM DO MAILCHIMPA -->
+<!-- JavaScript logic -->
 <script>
+  // Show popup after page load
   window.addEventListener('load', () => {
-    if (!localStorage.getItem('emailSignedUp')) {
-      document.getElementById('mc_modal_overlay').style.display = 'flex';
-    }
+    document.getElementById('mc_modal_overlay').style.display = 'flex';
   });
 
+  // Close popup button
   document.getElementById('mc_close_popup').addEventListener('click', () => {
-    if (!localStorage.getItem('emailSignedUp')) {
-      alert('Please enter your email to continue!');
-    } else {
-      document.getElementById('mc_modal_overlay').style.display = 'none';
-    }
+    document.getElementById('mc_modal_overlay').style.display = 'none';
   });
 
-  document.getElementById('mc-embedded-subscribe-form').addEventListener('submit', function (e) {
+  // Handle form submission
+  document.getElementById('mc-embedded-subscribe-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    const email = document.getElementById('mce-EMAIL').value.trim();
-    if (!email || !email.includes('@')) {
-      alert('Please enter a valid email address.');
-      return;
-    }
+    const email = document.getElementById('mce-EMAIL').value;
 
-    const url = `https://training25.us22.list-manage.com/subscribe/post-json?u=8a965ddfffa7a1e11395e0f5d&id=faca822432&f_id=00fac2e1f0&EMAIL=${encodeURIComponent(email)}&tags=287&c=mcCallback`;
+    // Replace this with your actual Mailchimp endpoint
+    const url = "https://training25.us22.list-manage.com/subscribe/post-json?u=8a965ddfffa7a1e11395e0f5d&id=faca822432&f_id=00fac2e1f0&c=?";
 
+    // Prepare request
     const script = document.createElement('script');
-    script.src = url;
+    script.src = `${url}&EMAIL=${encodeURIComponent(email)}`;
     document.body.appendChild(script);
 
-    window.mcCallback = function (data) {
-      if (data.result === "success") {
-        localStorage.setItem('emailSignedUp', 'true');
-        document.getElementById('mc_success_message').textContent = "Thanks! You're on the list 😊";
-        document.getElementById('mc_success_message').style.display = 'block';
-        document.querySelector('#mc-embedded-subscribe-form input[type="submit"]').disabled = true;
-        setTimeout(() => {
-          document.getElementById('mc_modal_overlay').style.display = 'none';
-        }, 2500);
-      } else {
-        alert('Something went wrong: ' + data.msg);
-      }
-    }
+    // Show success, hide form, auto close
+    document.getElementById('mc_success_message').style.display = 'block';
+    this.querySelector('input[type="submit"]').disabled = true;
+    setTimeout(() => {
+      document.getElementById('mc_modal_overlay').style.display = 'none';
+    }, 3000); // close after 3 seconds
   });
 </script>
+
 
 
 
