@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Training25 - ArcGIS Experience Builder — A Complete Guide</title>
+  <style>
+    :root {
+      --sidebar-width: 280px;
+      --sidebar-bg: #f8f9fa;
+      --sidebar-border: #dee2e6;
+      --primary-color: #007bff;
+      --secondary-color: #6c757d;
+      --success-color: #28a745;
+      --danger-color: #dc3545;
+      --light-color: #f8f9fa;
+      --dark-color: #343a40;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #e9ecef;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    #header {
+      background-color: var(--dark-color);
+      color: white;
+      padding: 10px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    #header-info {
+      display: flex;
+      gap: 20px;
+    }
+    
+    .info-box {
+      background-color: rgba(255,255,255,0.1);
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    
+    #main-container {
+      display: flex;
+      height: calc(100vh - 50px);
+      width: 100%;
+      overflow: hidden;
+    }
+    
+    #left-sidebar {
+      width: var(--sidebar-width);
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--sidebar-border);
+      height: 100%;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .sidebar-section {
+      padding: 15px;
+      border-bottom: 1px solid var(--sidebar-border);
+    }
+    
+    .sidebar-section h3 {
+      margin-top: 0;
+      margin-bottom: 15px;
+      color: var(--dark-color);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .sidebar-section h3::before {
+      content: "";
+      display: inline-block;
+      width: 4px;
+      height: 16px;
+      background-color: var(--primary-color);
+      border-radius: 2px;
+    }
+    
+    #right-sidebar {
+      width: var(--sidebar-width);
+      background: var(--sidebar-bg);
+      border-left: 1px solid var(--sidebar-border);
+      height: 100%;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+    
+    #editor-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow: auto;
+      height: 100%;
+      background-color: #e9ecef;
+      padding: 20px;
+    }
+    
+    #editor-wrapper {
+      width: 80%;
+      margin: 0 auto;
+      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      background-color: white;
+      min-height: 100%;
+    }
+    
+    #editor {
+      background: white;
+      width: 100%;
+      min-height: 297mm;
+      padding: 40px;
+      font-size: 16px;
+      color: black;
+      position: relative;
+    }
+    
+    .task-btn {
+      background-color: var(--success-color);
+      color: white;
+      border-radius: 6px;
+      padding: 8px 12px;
+      font-size: 14px;
+      cursor: pointer;
+      margin-bottom: 8px;
+      width: 100%;
+      border: none;
+      transition: all 0.2s;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .task-btn:hover {
+      background-color: #218838;
+      transform: translateY(-1px);
+    }
+    
+    .task-btn::before {
+      content: "📁";
+    }
+    
+    #json-viewer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 10000;
+      display: none;
+      overflow: auto;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+    
+    #json-content {
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-width: 800px;
+      margin: 20px auto;
+      font-family: monospace;
+      white-space: pre-wrap;
+      max-height: 80vh;
+      overflow: auto;
+    }
+    
+    #close-json,
+    #copy-json {
+      position: absolute;
+      top: 20px;
+      background: var(--danger-color);
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 15px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    
+    #copy-json { 
+      right: 120px;
+      background: var(--primary-color);
+    }
+    
+    #close-json:hover, #copy-json:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+    
+    .section-title {
+      font-size: 24px;
+      color: #003366;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
+    .subsection-title {
+      font-size: 18px;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+      font-weight: 500;
+    }
+    
+    .draggable,
+    .text-block {
+      position: absolute;
+      user-select: none;
+      cursor: move;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    
+    .draggable {
+      background: var(--danger-color);
+      color: white;
+      font-weight: bold;
+    }
+    
+    .text-block {
+      background: white;
+      border: 1px dashed #adb5bd;
+      text-align: justify;
+      max-width: 80%;
+      background-color: #f8f9fa;
+    }
+    
+    .page-item {
+      padding: 10px 15px;
+      margin: 4px 0;
+      background: white;
+      cursor: pointer;
+      border-radius: 6px;
+      border-left: 3px solid transparent;
+      transition: all 0.2s;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+    
+    .page-item:hover {
+      background-color: #f1f3f5;
+    }
+    
+    .page-item.active {
+      background-color: var(--primary-color);
+      color: white;
+      border-left-color: var(--dark-color);
+    }
+    
+    .image-container {
+      position: absolute;
+      cursor: move;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      border: 1px solid #dee2e6;
+    }
+    
+    .image-container img {
+      max-width: 100%;
+      max-height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+    
+    /* Scrollbar styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background: #c1c1c1;
+      border-radius: 4px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+      background: #a8a8a8;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with info -->
+  <div id="header">
+    <div>Learning Platform - Training25 - ArcGIS Experience Builder — A Complete Guide</div>
+    <div id="header-info">
+      <div class="info-box" id="current-task-info">Task: Not selected</div>
+      <div class="info-box" id="current-page-info">Page: Not selected</div>
+    </div>
+  </div>
+
+  <!-- Main interface -->
+  <div id="main-container">
+    <div id="left-sidebar">
+      <div class="sidebar-section">
+        <h3>Load Tape</h3>
+        <div id="github-file-list"></div>
+      </div>
+    </div>
+    
+    <div id="editor-container">
+      <div id="editor-wrapper">
+        <div id="editor"></div>
+      </div>
+    </div>
+    
+    <div id="right-sidebar">
+      <div class="sidebar-section">
+        <h3>Pages</h3>
+        <div id="pageList"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal JSON Viewer -->
+  <div id="json-viewer">
+    <button id="close-json" onclick="closeJSONViewer()">Close</button>
+    <button id="copy-json" onclick="copyJSONToClipboard()">Copy JSON</button>
+    <div id="json-content"></div>
+  </div>
+
+  <!-- External Libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <script>
+    // GitHub configuration
+    const githubRepo = 'https://raw.githubusercontent.com/trainingtwenty5/tapes-of-XBLD/main/';
+    
+    let numberCounter = 1;
+    let tasks = [];
+    let taskTitles = [];
+    let activeTaskIndex = 0;
+    let activePageIndex = 0;
+
+    // List of JSON files (1-29)
+    const githubFiles = [
+      "1.json", "2_Clean.json", "3.json", "4.json", "5_Clean.json", 
+      "6_Clean.json", "7_Clean.json", "8_Clean.json", "9.json", "10.json", "11.json",
+      "12.json", "13.json", "14.json", "15.json", "16.json", "17.json", 
+      "18.json", "19.json", "20.json", "21.json", "22_Clean.json", 
+      "23.json", "24.json", "25.json", "26.json", "27.json", "28.json", 
+      "29.json"
+    ];
+
+    // Mapping of file names to display names with full lesson names
+    const tapeNames = {
+      '1.json': 'Assignment 1: Add data in ArcGIS Online',
+      '2_Clean.json': 'Assignment 2: Web Map Configuration',
+      '3.json': 'Assignment 3: First EB Application Creation: Choosing Template, Adding Header and "Page 1"',
+      '4.json': 'Assignment 4: Adding and Configuring a WebMap in Experience Builder',
+      '5_Clean.json': 'Assignment 5: Creating and Modifying a Window in ArcGIS Experience Builder',
+      '6_Clean.json': 'Assignment 6: Adding Sections in Our App',
+      '7_Clean.json': 'Assignment 7: Setting a Custom Map Extent in ArcGIS Experience Builder',
+      '8_Clean.json': 'Assignment 8: Creating a List and Connecting It to Data in Experience Builder',
+      '9.json': 'Assignment 9: Change Graphics to Valley Colors (Optional Challenge)',
+      '10.json': 'Assignment 10: Configure the Data filtering changes Trigger',
+      '11.json': 'Assignment 11: Configure the Record Selection Changes Trigger',
+      '12.json': 'Assignment 12: Creating and Configuring a Web Map with Separated Layers',
+      '13.json': 'Assignment 13: Managing Layers in Mapping Applications',
+      '14.json': 'Assignment 14: Creating a layer and adding it to a WebMap in ArcGIS Online',
+      '15.json': 'Assignment 15: Configuring the Edit Widget in Experience',
+      '16.json': 'Assignment 16: Builder Interface Design in Experience Builder',
+      '17.json': 'Assignment 17: The Concept of Experience Builder Applications',
+      '18.json': 'Assignment 18: Configuring "Page 2" and Widgets in Experience Builder',
+      '19.json': 'Assignment 19: Configuring the Search Widget in Experience Builder',
+      '20.json': 'Assignment 20: Creating a Multi-Clause Filter – Filtering Ski Slopes',
+      '21.json': 'Assignment 21: Filter Configuration and Its Impact on the Search Widget',
+      '22_Clean.json': 'Assignment 22: Using the Timeline Widget and Time-Enabled - "Page 2"',
+      '23.json': 'Assignment 23: Data Configuring "Page 4" and Managing Filter Integration',
+      '24.json': 'Assignment 24: Creating and Embedding a Dashboard in Experience Builder',
+      '25.json': 'Assignment 25: Configuring an interactive link',
+      '26.json': 'Assignment 26: Using URL Parameters to Filter Dashboards in ArcGIS Experience Builder',
+      '27.json': 'Assignment 27: Configuring "Page 5" and Dynamic Chart Filtering Based on Map Extent',
+      '28.json': 'Assignment 28: Designing Interactive Cards with Webcams in Experience Builder',
+      '29.json': 'Assignment 29: Configuring "Page 7" and Integrating Survey123'
+    };
+
+    window.onload = function() {
+      loadStaticGitHubFileList();
+      updatePageList();
+      renderEditor();
+      updateHeaderInfo();
+    };
+
+    function updateHeaderInfo() {
+      const taskInfo = document.getElementById('current-task-info');
+      const pageInfo = document.getElementById('current-page-info');
+      
+      if (tasks[activeTaskIndex] && tasks[activeTaskIndex][activePageIndex]) {
+        const fileName = githubFiles[activeTaskIndex];
+        taskInfo.textContent = `Task: ${tapeNames[fileName] || fileName}`;
+        pageInfo.textContent = `Page: ${activePageIndex + 1} of ${tasks[activeTaskIndex].length}`;
+      } else {
+        taskInfo.textContent = `Task: Not selected`;
+        pageInfo.textContent = `Page: Not selected`;
+      }
+    }
+
+    function loadStaticGitHubFileList() {
+      const container = document.getElementById('github-file-list');
+      container.innerHTML = '';
+
+      githubFiles.forEach((fileName, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'task-btn';
+        btn.innerHTML = `<span>${tapeNames[fileName] || fileName}</span>`;
+        
+        btn.onclick = async () => {
+          try {
+            // Show loading state
+            btn.innerHTML = '<span>Loading...</span>';
+            
+            const response = await fetch(`${githubRepo}${fileName}`);
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const json = await response.json();
+            
+            // Update active task before loading
+            activeTaskIndex = index;
+            loadFromJSON(json, index);
+            
+            // Reset button state
+            btn.innerHTML = `<span>${tapeNames[fileName] || fileName}</span>`;
+            
+            // Update active button styling
+            document.querySelectorAll('.task-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
+          } catch (err) {
+            console.error('Error loading file:', err);
+            btn.innerHTML = `<span>${tapeNames[fileName] || fileName} (Error)</span>`;
+            alert(`Failed to load ${tapeNames[fileName] || fileName}: ${err.message}`);
+          }
+        };
+
+        // Highlight first button by default
+        if (index === 0) {
+          btn.classList.add('active');
+        }
+
+        container.appendChild(btn);
+      });
+    }
+
+    function loadFromJSON(data, taskIndex = 0) {
+      // Initialize tasks array if empty
+      if (!tasks.length) {
+        tasks = new Array(githubFiles.length).fill().map(() => []);
+      }
+
+      const editor = document.getElementById('editor');
+      editor.innerHTML = '';
+      
+      if (data.tasks) {
+        // Clear existing task data
+        tasks[taskIndex] = [];
+        
+        data.tasks.forEach((taskData) => {
+          const newTask = [];
+          
+          taskData.forEach((pageData) => {
+            const newPage = document.createElement('div');
+            newPage.className = 'task-page';
+            
+            pageData.forEach(elementData => {
+              let element;
+              
+              // Create element based on type
+              switch(elementData.type) {
+                case 'section':
+                  element = document.createElement('div');
+                  element.className = 'section-title';
+                  element.textContent = elementData.content;
+                  break;
+                  
+                case 'subsection':
+                  element = document.createElement('div');
+                  element.className = 'subsection-title';
+                  element.textContent = elementData.content;
+                  break;
+                  
+                case 'number':
+                  element = document.createElement('div');
+                  element.className = 'draggable';
+                  element.textContent = elementData.content;
+                  break;
+                  
+                case 'text':
+                  element = document.createElement('div');
+                  element.className = 'text-block';
+                  element.textContent = elementData.content;
+                  break;
+                  
+                case 'image':
+                  const container = document.createElement('div');
+                  container.className = 'image-container';
+                  
+                  const img = document.createElement('img');
+                  img.src = elementData.content || '';
+                  img.style.display = 'block';
+                  
+                  container.style.width = elementData.style?.width || '200px';
+                  container.style.height = elementData.style?.height || '150px';
+                  container.appendChild(img);
+                  element = container;
+                  break;
+              }
+              
+              if (element) {
+                // Apply positioning
+                element.style.position = 'absolute';
+                element.style.top = elementData.style?.top || '100px';
+                element.style.left = elementData.style?.left || '100px';
+                
+                // Apply additional styles
+                if (elementData.style) {
+                  Object.entries(elementData.style).forEach(([key, value]) => {
+                    if (!['top', 'left', 'width', 'height'].includes(key)) {
+                      element.style[key] = value;
+                    }
+                  });
+                }
+                
+                makeDraggable(element);
+                newPage.appendChild(element);
+              }
+            });
+            
+            newTask.push(newPage);
+          });
+          
+          tasks[taskIndex] = newTask;
+        });
+      }
+      
+      // Update counters and UI
+      numberCounter = data.numberCounter || 1;
+      activeTaskIndex = taskIndex;
+      activePageIndex = 0;
+      
+      updatePageList();
+      renderEditor();
+      updateHeaderInfo();
+    }
+
+    function updatePageList() {
+      const pageList = document.getElementById('pageList');
+      pageList.innerHTML = '';
+      
+      if (tasks[activeTaskIndex]) {
+        tasks[activeTaskIndex].forEach((page, index) => {
+          const div = document.createElement('div');
+          div.className = 'page-item' + (index === activePageIndex ? ' active' : '');
+          div.textContent = `Page ${index + 1}`;
+          div.onclick = () => switchPage(index);
+          pageList.appendChild(div);
+        });
+      }
+    }
+
+    function switchPage(index) {
+      if (!tasks[activeTaskIndex] || index < 0 || index >= tasks[activeTaskIndex].length) return;
+      activePageIndex = index;
+      updatePageList();
+      renderEditor();
+      updateHeaderInfo();
+    }
+
+    function renderEditor() {
+      const editor = document.getElementById('editor');
+      editor.innerHTML = '';
+      
+      if (tasks[activeTaskIndex] && tasks[activeTaskIndex][activePageIndex]) {
+        const pageClone = tasks[activeTaskIndex][activePageIndex].cloneNode(true);
+        editor.appendChild(pageClone);
+        
+        Array.from(pageClone.querySelectorAll('.section-title, .subsection-title, .draggable, .text-block, .image-container'))
+          .forEach(makeDraggable);
+      }
+    }
+
+    function makeDraggable(elmnt) {
+      let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+      elmnt.onmousedown = function(e) {
+        e.preventDefault();
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+        elmnt.style.zIndex = '1000';
+      };
+
+      function elementDrag(e) {
+        e.preventDefault();
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        elmnt.style.top = `${elmnt.offsetTop - pos2}px`;
+        elmnt.style.left = `${elmnt.offsetLeft - pos1}px`;
+      }
+
+      function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+        elmnt.style.zIndex = '';
+      }
+    }
+
+    function closeJSONViewer() {
+      document.getElementById('json-viewer').style.display = 'none';
+    }
+
+    function copyJSONToClipboard() {
+      const json = document.getElementById('json-content').textContent;
+      navigator.clipboard.writeText(json).then(() => {
+        alert('JSON copied to clipboard!');
+      }).catch(err => {
+        alert('Failed to copy JSON: ' + err.message);
+      });
+    }
+  </script>
+</body>
+</html>

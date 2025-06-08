@@ -1,0 +1,28 @@
+{
+  "tasks": [
+    [
+      [
+        {
+          "type": "text",
+          "content": "Lessons 2, 5, 6, 7, 8, and 22 are unavailable in this mode, but they can be downloaded as PDFs from Udemy. We're still working on restoring these lessons. Hopefully, they will be available soon.",
+          "style": {
+            "top": "78px",
+            "left": "9px",
+            "fontSize": "14px",
+            "color": "#000000",
+            "backgroundColor": "#ffffff",
+            "textAlign": "justify",
+            "width": "",
+            "height": ""
+          }
+        }
+      ]
+    ]
+  ],
+  "activeTaskIndex": 0,
+  "activePageIndex": 0,
+  "numberCounter": 24,
+  "longInstructions": "",
+  "version": "1.2",
+  "timestamp": "2025-06-07T13:51:04.176Z"
+}
