@@ -1,8 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" href="https://import.cdn.thinkific.com/1010971%2Fcustom_site_themes%2Fid%2F4U3mAE1bTTuIDVWOhdRH_DA533D79-F0EB-45D5-B432-912914136A55.png">
+  <link rel="icon" href="https://import.cdn.thinkific.com/1010971%2Fcustom_site_themes%2Fid%2F4U3mAE1bTTuIDVWOhdRH_DA533D79-F0EB-45D5-B432-912914136A55.png">
+
+
+
+
+
+
+
+
   <meta charset="UTF-8" />
   <title>Training25 - ArcGIS Experience Builder — A Complete Guide</title>
+  
+  
+  
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SHZ7NK33X3"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SHZ7NK33X3');
+</script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <style>
     :root {
       --sidebar-width: 280px;
@@ -296,17 +329,111 @@
     ::-webkit-scrollbar-thumb:hover {
       background: #a8a8a8;
     }
+	
+	
+	
+	
+	
+	
+	
+	
+	/* Reset list style i marginesy */
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2c3e50;
+  color: #ecf0f1;
+  padding: 10px 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 16px;
+}
+
+#header > div:first-child {
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-right: 40px;
+}
+
+/* Styl dla listy nawigacji */
+#header ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+}
+
+/* Elementy menu */
+.header__nav-item {
+  margin-right: 25px;
+}
+
+/* Linki w menu */
+.header__nav-item a {
+  color: #ecf0f1;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.header__nav-item a:hover,
+.header__nav-item a:focus {
+  background-color: #3498db;
+  color: white;
+  outline: none;
+}
+
+/* Kontener z info po prawej */
+#header-info {
+  display: flex;
+  gap: 15px;
+  flex-shrink: 0;
+}
+
+/* Styl pojedynczego info-box */
+.info-box {
+  background-color: #34495e;
+  padding: 6px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #bdc3c7;
+  white-space: nowrap;
+}
+
   </style>
 </head>
 <body>
   <!-- Header with info -->
-  <div id="header">
-    <div>Learning Platform - Training25 - ArcGIS Experience Builder — A Complete Guide</div>
-    <div id="header-info">
-      <div class="info-box" id="current-task-info">Task: Not selected</div>
-      <div class="info-box" id="current-page-info">Page: Not selected</div>
-    </div>
+<div id="header">
+  <div>Training25</div>
+  <ul>
+    <li class="header__nav-item">
+      <a href="https://training25.thinkific.com/#why" target="_self">Why Training 25</a>
+    </li>
+    <li class="header__nav-item">
+      <a href="https://training25.thinkific.com/pages/Lecture-Plan" target="_self">Our product</a>
+    </li>
+    <li class="header__nav-item">
+      <a href="https://www.udemy.com/course/arcgis-xbld/?referralCode=4358C636EADDAB1A4C69" target="_blank">Get Started</a>
+    </li>
+    <li class="header__nav-item">
+      <a href="https://training25.thinkific.com/#FAQ" target="_self">FAQ</a>
+    </li>
+    <li class="header__nav-item">
+      <a href="https://training25.thinkific.com/#about" target="_self">About</a>
+    </li>
+    <li class="header__nav-item">
+      <a href="https://training25.thinkific.com/#foot" target="_self">Contact</a>
+    </li>
+  </ul>
+  <div id="header-info">
+    <div class="info-box" id="current-task-info">Task: Not selected</div>
+    <div class="info-box" id="current-page-info">Page: Not selected</div>
   </div>
+</div>
+
 
   <!-- Main interface -->
   <div id="main-container">
