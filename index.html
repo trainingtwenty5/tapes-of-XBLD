@@ -7,6 +7,8 @@
 
 
 
+<!-- Mailchimp + Popup -->
+<link href="https://cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
 
 
 
@@ -29,7 +31,17 @@
   
   
   
-  
+  <!-- Hotjar Tracking Code for https://trainingtwenty5.github.io/tapes-of-XBLD/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:6428920,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
   
   
   
@@ -435,6 +447,8 @@
 </div>
 
 
+
+
   <!-- Main interface -->
   <div id="main-container">
     <div id="left-sidebar">
@@ -457,6 +471,125 @@
       </div>
     </div>
   </div>
+
+
+
+
+<!-- Mailchimp + Popup -->
+<link href="https://cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
+
+<style>
+  #mc_modal_overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #mc_embed_signup {
+    background: #fff;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    position: relative;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  #mc_close_popup {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+  }
+
+  #mc_embed_signup h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .mc-description {
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  #mc_success_message {
+    display: none;
+    color: green;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+</style>
+
+<!-- POPUP MODAL -->
+<div id="mc_modal_overlay">
+  <div id="mc_embed_signup">
+    <button id="mc_close_popup" aria-label="Close popup">&times;</button>
+    <h2>Join and get a bonus! 🎁</h2>
+    <div class="mc-description">
+      Want a <strong>discount code</strong> and a chance to get <strong>free course access</strong>?  
+      Just drop your email below — we regularly gift free codes! 🙌
+    </div>
+    <form id="mc-embedded-subscribe-form">
+      <div class="mc-field-group">
+        <label for="mce-EMAIL">Your email <span class="asterisk">*</span></label>
+        <input type="email" name="EMAIL" id="mce-EMAIL" class="required email" required>
+      </div>
+      <div id="mc_success_message">Thanks! You’re on the list 😊</div>
+      <div class="clear foot" style="margin-top: 20px;">
+        <input type="submit" class="button" value="Sign me up">
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- JavaScript logic -->
+<script>
+  // Show popup after page load
+  window.addEventListener('load', () => {
+    document.getElementById('mc_modal_overlay').style.display = 'flex';
+  });
+
+  // Close popup button
+  document.getElementById('mc_close_popup').addEventListener('click', () => {
+    document.getElementById('mc_modal_overlay').style.display = 'none';
+  });
+
+  // Handle form submission
+  document.getElementById('mc-embedded-subscribe-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const email = document.getElementById('mce-EMAIL').value;
+
+    // Replace this with your actual Mailchimp endpoint
+    const url = "https://trainingtwenty5.github.io/tapes-of-XBLD/";
+
+    // Prepare request
+    const script = document.createElement('script');
+    script.src = `${url}&EMAIL=${encodeURIComponent(email)}`;
+    document.body.appendChild(script);
+
+    // Show success, hide form, auto close
+    document.getElementById('mc_success_message').style.display = 'block';
+    this.querySelector('input[type="submit"]').disabled = true;
+    setTimeout(() => {
+      document.getElementById('mc_modal_overlay').style.display = 'none';
+    }, 3000); // close after 3 seconds
+  });
+</script>
+
+
+
+
 
   <!-- Modal JSON Viewer -->
   <div id="json-viewer">
@@ -765,5 +898,14 @@
       });
     }
   </script>
+  
+
+
+
+
+ 
+  
 </body>
+
+
 </html>
