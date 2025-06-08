@@ -531,10 +531,9 @@
   }
 </style>
 
-<!-- POPUP MODAL -->
 <div id="mc_modal_overlay">
   <div id="mc_embed_signup">
-    <button id="mc_close_popup" aria-label="Close popup">&times;</button>
+    <button id="mc_close_popup">&times;</button>
     <h2>Join and get a bonus! 🎁</h2>
     <div class="mc-description">
       Want a <strong>discount code</strong> and a chance to get <strong>free course access</strong>?  
@@ -553,39 +552,53 @@
   </div>
 </div>
 
-<!-- JavaScript logic -->
+<!-- FORM BEZ REDIRECTU, Z ZAPISEM DO MAILCHIMPA -->
 <script>
-  // Show popup after page load
   window.addEventListener('load', () => {
-    document.getElementById('mc_modal_overlay').style.display = 'flex';
+    if (!localStorage.getItem('emailSignedUp')) {
+      document.getElementById('mc_modal_overlay').style.display = 'flex';
+    }
   });
 
-  // Close popup button
   document.getElementById('mc_close_popup').addEventListener('click', () => {
-    document.getElementById('mc_modal_overlay').style.display = 'none';
+    if (!localStorage.getItem('emailSignedUp')) {
+      alert('Please enter your email to continue!');
+    } else {
+      document.getElementById('mc_modal_overlay').style.display = 'none';
+    }
   });
 
-  // Handle form submission
-  document.getElementById('mc-embedded-subscribe-form').addEventListener('submit', function(e) {
+  document.getElementById('mc-embedded-subscribe-form').addEventListener('submit', function (e) {
     e.preventDefault();
-    const email = document.getElementById('mce-EMAIL').value;
+    const email = document.getElementById('mce-EMAIL').value.trim();
+    if (!email || !email.includes('@')) {
+      alert('Please enter a valid email address.');
+      return;
+    }
 
-    // Replace this with your actual Mailchimp endpoint
-    const url = "https://trainingtwenty5.github.io/tapes-of-XBLD/";
+    const url = `https://training25.us22.list-manage.com/subscribe/post-json?u=8a965ddfffa7a1e11395e0f5d&id=faca822432&f_id=00fac2e1f0&EMAIL=${encodeURIComponent(email)}&tags=287&c=mcCallback`;
 
-    // Prepare request
     const script = document.createElement('script');
-    script.src = `${url}&EMAIL=${encodeURIComponent(email)}`;
+    script.src = url;
     document.body.appendChild(script);
 
-    // Show success, hide form, auto close
-    document.getElementById('mc_success_message').style.display = 'block';
-    this.querySelector('input[type="submit"]').disabled = true;
-    setTimeout(() => {
-      document.getElementById('mc_modal_overlay').style.display = 'none';
-    }, 3000); // close after 3 seconds
+    window.mcCallback = function (data) {
+      if (data.result === "success") {
+        localStorage.setItem('emailSignedUp', 'true');
+        document.getElementById('mc_success_message').textContent = "Thanks! You're on the list 😊";
+        document.getElementById('mc_success_message').style.display = 'block';
+        document.querySelector('#mc-embedded-subscribe-form input[type="submit"]').disabled = true;
+        setTimeout(() => {
+          document.getElementById('mc_modal_overlay').style.display = 'none';
+        }, 2500);
+      } else {
+        alert('Something went wrong: ' + data.msg);
+      }
+    }
   });
 </script>
+
+
 
 
 
