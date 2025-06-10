@@ -5,7 +5,7 @@
   <link rel="apple-touch-icon" href="https://import.cdn.thinkific.com/1010971%2Fcustom_site_themes%2Fid%2F4U3mAE1bTTuIDVWOhdRH_DA533D79-F0EB-45D5-B432-912914136A55.png">
   <link rel="icon" href="https://import.cdn.thinkific.com/1010971%2Fcustom_site_themes%2Fid%2F4U3mAE1bTTuIDVWOhdRH_DA533D79-F0EB-45D5-B432-912914136A55.png">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
 
 
 
@@ -673,33 +673,19 @@ body {
   }
   .alert-banner {
   display: none;
+  
   }
-
-}
-
-
-
-
-/* Dla wszystkich przeglądarek */
-:fullscreen #editor-wrapper,
-:-webkit-full-screen #editor-wrapper,
-:-moz-full-screen #editor-wrapper,
-:-ms-fullscreen #editor-wrapper {
-  width: 100% !important;
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 20px !important;
-  border: none !important;
-  box-shadow: none !important;
-  overflow: auto !important;
-  min-height: 100vh !important;
-}
-
-/* Ukryj przycisk fullscreen w trybie pełnoekranowym */
-:fullscreen #fullscreen-toggle,
-:-webkit-full-screen #fullscreen-toggle {
+  #fullscreen-toggle {
   display: none;
+  }
+  
+
 }
+
+
+
+
+
 
 
 
@@ -1724,43 +1710,6 @@ document.addEventListener('fullscreenchange', () => {
 document.addEventListener('fullscreenerror', (err) => {
   console.error('Błąd pełnego ekranu:', err);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-function toggleFullscreen() {
-  const elem = document.getElementById('editor-wrapper');
-  
-  if (!document.fullscreenElement) {
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { /* Safari */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 */
-      elem.msRequestFullscreen();
-    }
-  } else {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) { /* Safari */
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { /* IE11 */
-      document.msExitFullscreen();
-    }
-  }
-}
-
-// Zaktualizuj przycisk
-document.getElementById('fullscreen-toggle').addEventListener('click', toggleFullscreen);
 </script>
 
 </body>
