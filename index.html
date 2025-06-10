@@ -240,7 +240,8 @@ body {
 /* Styl pod A4 */
 #editor-wrapper {
   width: 200mm;
-  margin: 20px auto 40px; /* większy margin na dole */
+ 
+  margin: 40px auto 40px; /* większy margin na dole */
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
   background-color: white;
   min-height: 297mm;
@@ -479,7 +480,568 @@ body {
   background: #a8a8a8;
 }
 
-  </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* Cookie Banner Styles */
+  #cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #003366;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  #cookie-banner p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    max-width: 85%;
+  }
+  
+  #cookie-banner a {
+    color: #fff8b3;
+    text-decoration: underline;
+    transition: color 0.3s;
+  }
+  
+  #cookie-banner a:hover {
+    color: white;
+  }
+  
+  #accept-cookies {
+    background: #fff8b3;
+    color: #003366;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+  
+  #accept-cookies:hover {
+    background: white;
+    transform: translateY(-1px);
+  }
+
+  /* Footer Styles */
+  .footer {
+    background-color: #000;
+    color: #fff;
+    padding: 25px 0 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: auto;
+  }
+  
+  .footer__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .footer__nav-site {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 25px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer__nav-item a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .footer__nav-item a:hover {
+    color: rgb(3, 178, 199);
+  }
+  
+  .footer__contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .footer__contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .footer__contact-label {
+    font-weight: 500;
+    margin-right: 5px;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .footer__contact a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 14px;
+  }
+  
+  .footer__contact a:hover {
+    color: rgb(3, 178, 199);
+  }
+  
+  .footer__copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+  
+  @media (max-width: 768px) {
+    #cookie-banner {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+      padding: 15px;
+    }
+    
+    #cookie-banner p {
+      max-width: 100%;
+    }
+    
+    .footer__content {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .footer__nav-site {
+      justify-content: center;
+    }
+    
+    .footer__contact-info {
+      align-items: center;
+      text-align: center;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.alert-banner {
+  background-color: #ff4d4d; /* jasnoczerwone tło */
+  color: #000;
+  padding: 10px 20px;
+  font-size: 14px;
+  text-align: center;
+  border-bottom: 2px solid #b30000;
+}
+
+.alert-banner a {
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.banner {
+  background-color: #fff8b3; /* jasny żółty */
+  color: #333; /* ciemny tekst dla kontrastu */
+  padding: 16px 24px;
+  border: 1px solid #ffe066;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+
+#fullscreen-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 12px;
+  background-color: black;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Style dla trybu pełnoekranowego */
+:fullscreen #editor-wrapper {
+  width: 100% !important;
+  margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 20px !important;
+  min-height: 100vh !important;
+}
+
+:fullscreen #editor {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Przyciski do chowania paneli */
+.sidebar-toggle {
+  position: fixed;
+  top: 140px;
+  z-index: 100;
+  background: #003366;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 0 4px 4px 0;
+  display: none;
+}
+
+#left-sidebar-toggle {
+  left: 0;
+}
+
+#right-sidebar-toggle {
+  right: 0;
+  border-radius: 4px 0 0 4px;
+}
+
+/* Responsywność */
+@media (max-width: 1200px) {
+  #editor-wrapper {
+    width: 90%;
+    padding: 20px;
+  }
+  
+  #editor {
+    width: 100%;
+  }
+}
+
+@media (max-width: 992px) {
+  :root {
+    --sidebar-width: 240px;
+  }
+}
+
+@media (max-width: 768px) {
+  #main-container {
+    flex-direction: column;
+    height: auto;
+    min-height: calc(100vh - 50px);
+  }
+  
+  #left-sidebar, 
+  #right-sidebar {
+    position: fixed;
+    top: 50px;
+    bottom: 0;
+    z-index: 90;
+    transform: translateX(-100%);
+  }
+  
+  #right-sidebar {
+    right: 0;
+    left: auto;
+    transform: translateX(100%);
+  }
+  
+  #left-sidebar.active {
+    transform: translateX(0);
+  }
+  
+  #right-sidebar.active {
+    transform: translateX(0);
+  }
+  
+  .sidebar-toggle {
+    display: block;
+  }
+  
+  #editor-container {
+    padding: 10px;
+    order: 1;
+  }
+  
+  #editor-wrapper {
+    width: 100%;
+    margin: 10px 0;
+    padding: 15px;
+  }
+  
+  #header ul {
+    font-size: 10px;
+  }
+  
+  #header h1 {
+    font-size: 18px;
+  }
+  
+  .info-box {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+  
+  .sidebar-section h3 {
+    font-size: 14px;
+  }
+  
+  .task-btn, .page-item {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+  
+  .banner {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+
+  
+  #header-info {
+    gap: 8px;
+  }
+  
+  .info-box {
+    white-space: normal;
+  }
+  
+  .alert-banner {
+    font-size: 12px;
+    padding: 8px 10px;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  #editor-container {
+    padding: 60px 10px 100px; /* np. większy padding na dole */
+  }
+  
+    #header {
+    padding: 10px 15px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  #mc_modal_overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #mc_embed_signup {
+    background: #fff;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    position: relative;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  #mc_close_popup {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+  }
+
+  #mc_embed_signup h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .mc-description {
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  #mc_success_message {
+    display: none;
+    color: green;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  #mc_modal_overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    z-index: 9999;
+    display: none;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #mc_embed_signup {
+    background: #fff;
+    padding: 30px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 0 25px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    position: relative;
+    font-family: Helvetica, Arial, sans-serif;
+  }
+
+  #mc_close_popup {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: #888;
+  }
+
+  #mc_embed_signup h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+  }
+
+  .mc-description {
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: #333;
+  }
+
+  #mc_success_message {
+    display: none;
+    color: green;
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  
+  
+  
+  
+
+
+</style>
 </head>
 <body>
   <!-- Header with info -->
@@ -524,63 +1086,6 @@ body {
 
 </div>
 
-<style>
-.alert-banner {
-  background-color: #ff4d4d; /* jasnoczerwone tło */
-  color: #000;
-  padding: 10px 20px;
-  font-size: 14px;
-  text-align: center;
-  border-bottom: 2px solid #b30000;
-}
-
-.alert-banner a {
-  color: #000;
-  font-weight: bold;
-  text-decoration: underline;
-}
-
-.banner {
-  background-color: #fff8b3; /* jasny żółty */
-  color: #333; /* ciemny tekst dla kontrastu */
-  padding: 16px 24px;
-  border: 1px solid #ffe066;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 500;
-  text-align: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-
-#fullscreen-toggle {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 8px 12px;
-  background-color: #495057;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  z-index: 1000;
-}
-
-/* Style dla trybu pełnoekranowego */
-:fullscreen #editor-wrapper {
-  width: 100% !important;
-  margin: 0 !important;
-  border: none !important;
-  box-shadow: none !important;
-  padding: 20px !important;
-  min-height: 100vh !important;
-}
-
-:fullscreen #editor {
-  width: 100% !important;
-  max-width: 100% !important;
-}
-</style>
 
 <div class="alert-banner">
   This is the page where you can select tasks from the course 
@@ -593,21 +1098,25 @@ body {
 
   <!-- Main interface -->
   <div id="main-container">
-  
-  
+    <!-- Przyciski do chowania paneli -->
+    <button id="left-sidebar-toggle" class="sidebar-toggle">☰ Tasks: Select tape to load</button>
+    <button id="right-sidebar-toggle" class="sidebar-toggle">☰ Pages: Select Page to load</button>
+    
+
   
     <div id="left-sidebar">
       <div class="sidebar-section">
         <h3>Load Tape</h3>
-		<div class="banner">
-Please select one of the available tapes. Tapes 2, 5, 6, 7, 8, 11, and 22 are empty and not ready for use. Others work fine.
-</div>
-<br>
-
-
+        <div class="banner">
+          Please select one of the available tapes. Tapes 2, 5, 6, 7, 8, 11, and 22 are empty and not ready for use. Others work fine.
+        </div>
+        <br>
         <div id="github-file-list"></div>
       </div>
     </div>
+	
+	
+	
     	  
     <div id="editor-container">
       <div id="editor-wrapper">
@@ -631,8 +1140,7 @@ Please select one of the available tapes. Tapes 2, 5, 6, 7, 8, 11, and 22 are em
       </div>
 
     
-	
-	
+
 	
     <div id="right-sidebar">
       <div class="sidebar-section">
@@ -651,114 +1159,6 @@ choose currently displayed page</div>
 
 
 
-<style>
-  #mc_modal_overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 9999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #mc_embed_signup {
-    background: #fff;
-    padding: 30px;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: 0 0 25px rgba(0,0,0,0.3);
-    border-radius: 10px;
-    position: relative;
-    font-family: Helvetica, Arial, sans-serif;
-  }
-
-  #mc_close_popup {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    background: none;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    color: #888;
-  }
-
-  #mc_embed_signup h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
-  }
-
-  .mc-description {
-    font-size: 15px;
-    margin-bottom: 20px;
-    color: #333;
-  }
-
-  #mc_success_message {
-    display: none;
-    color: green;
-    font-weight: bold;
-    margin-top: 15px;
-  }
-</style>
-
-
-
-<style>
-  #mc_modal_overlay {
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0,0,0,0.7);
-    z-index: 9999;
-    display: none;
-    justify-content: center;
-    align-items: center;
-  }
-
-  #mc_embed_signup {
-    background: #fff;
-    padding: 30px;
-    max-width: 500px;
-    width: 90%;
-    box-shadow: 0 0 25px rgba(0,0,0,0.3);
-    border-radius: 10px;
-    position: relative;
-    font-family: Helvetica, Arial, sans-serif;
-  }
-
-  #mc_close_popup {
-    position: absolute;
-    top: 8px;
-    right: 12px;
-    background: none;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    color: #888;
-  }
-
-  #mc_embed_signup h2 {
-    font-size: 22px;
-    margin-bottom: 10px;
-  }
-
-  .mc-description {
-    font-size: 15px;
-    margin-bottom: 20px;
-    color: #333;
-  }
-
-  #mc_success_message {
-    display: none;
-    color: green;
-    font-weight: bold;
-    margin-top: 15px;
-  }
-</style>
-
 
 <script>
 function closePopupAndRedirect() {
@@ -775,7 +1175,7 @@ function closePopupAndRedirect() {
 </script>
 
 
-<!-- POPUP MODAL -->
+<!-- POPUP MODAL
 <div id="mc_modal_overlay">
   <div id="mc_embed_signup">
     <button id="mc_close_popup" aria-label="Close popup" onclick="closePopupAndRedirect()">&times;</button>
@@ -795,7 +1195,7 @@ Subscribe to the newsletter to stay up to date with changes in the course and di
       </div>
     </form>
   </div>
-</div>
+</div> -->
 
 <!-- JavaScript logic -->
 <script>
@@ -907,6 +1307,45 @@ Subscribe to the newsletter to stay up to date with changes in the course and di
       renderEditor();
       updateHeaderInfo();
     };
+
+
+function setupSidebarToggles() {
+  const leftToggle = document.getElementById('left-sidebar-toggle');
+  const rightToggle = document.getElementById('right-sidebar-toggle');
+  const leftSidebar = document.getElementById('left-sidebar');
+  const rightSidebar = document.getElementById('right-sidebar');
+
+  leftToggle.addEventListener('click', () => {
+    leftSidebar.classList.toggle('active');
+    rightSidebar.classList.remove('active');
+  });
+
+  rightToggle.addEventListener('click', () => {
+    rightSidebar.classList.toggle('active');
+    leftSidebar.classList.remove('active');
+  });
+
+  // Zamknij panele klikając poza nimi
+  document.addEventListener('click', (e) => {
+    if (!leftSidebar.contains(e.target) && e.target !== leftToggle) {
+      leftSidebar.classList.remove('active');
+    }
+    if (!rightSidebar.contains(e.target) && e.target !== rightToggle) {
+      rightSidebar.classList.remove('active');
+    }
+  });
+}
+
+// Uruchom funkcję przy załadowaniu strony
+window.onload = function () {
+  setupSidebarToggles();
+        loadStaticGitHubFileList();
+      updatePageList();
+      renderEditor();
+      updateHeaderInfo();
+};
+
+
 
     function updateHeaderInfo() {
       const taskInfo = document.getElementById('current-task-info');
@@ -1151,171 +1590,7 @@ Subscribe to the newsletter to stay up to date with changes in the course and di
 
 
 
-<style>
-  /* Cookie Banner Styles */
-  #cookie-banner {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #003366;
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    z-index: 1000;
-    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
-  
-  #cookie-banner p {
-    margin: 0;
-    font-size: 14px;
-    line-height: 1.4;
-    max-width: 85%;
-  }
-  
-  #cookie-banner a {
-    color: #fff8b3;
-    text-decoration: underline;
-    transition: color 0.3s;
-  }
-  
-  #cookie-banner a:hover {
-    color: white;
-  }
-  
-  #accept-cookies {
-    background: #fff8b3;
-    color: #003366;
-    border: none;
-    padding: 8px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s;
-    white-space: nowrap;
-    font-size: 14px;
-  }
-  
-  #accept-cookies:hover {
-    background: white;
-    transform: translateY(-1px);
-  }
 
-  /* Footer Styles */
-  .footer {
-    background-color: #000;
-    color: #fff;
-    padding: 25px 0 15px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: auto;
-  }
-  
-  .footer__container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .footer__content {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 30px;
-    margin-bottom: 20px;
-  }
-  
-  .footer__nav-site {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 15px 25px;
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .footer__nav-item a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  .footer__nav-item a:hover {
-    color: rgb(3, 178, 199);
-  }
-  
-  .footer__contact-info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  
-  .footer__contact-details {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  
-  .footer__contact-label {
-    font-weight: 500;
-    margin-right: 5px;
-    color: #fff;
-    font-size: 14px;
-  }
-  
-  .footer__contact a {
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    font-size: 14px;
-  }
-  
-  .footer__contact a:hover {
-    color: rgb(3, 178, 199);
-  }
-  
-  .footer__copyright {
-    text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    font-size: 13px;
-    color: rgba(255,255,255,0.7);
-  }
-  
-  @media (max-width: 768px) {
-    #cookie-banner {
-      flex-direction: column;
-      text-align: center;
-      gap: 15px;
-      padding: 15px;
-    }
-    
-    #cookie-banner p {
-      max-width: 100%;
-    }
-    
-    .footer__content {
-      flex-direction: column;
-      gap: 20px;
-    }
-    
-    .footer__nav-site {
-      justify-content: center;
-    }
-    
-    .footer__contact-info {
-      align-items: center;
-      text-align: center;
-    }
-  }
-</style>
 
 <!-- Cookie Banner -->
 <div id="cookie-banner">
