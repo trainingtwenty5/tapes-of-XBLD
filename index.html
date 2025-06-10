@@ -1732,6 +1732,31 @@ document.addEventListener('fullscreenchange', () => {
 document.addEventListener('fullscreenerror', (err) => {
   console.error('Błąd pełnego ekranu:', err);
 });
+
+
+
+function adjustDraggablePositions() {
+  const editor = document.getElementById('editor');
+  const containerWidth = editor.offsetWidth;
+
+  document.querySelectorAll('.draggable').forEach(el => {
+    // Odczytaj oryginalne wartości top i left
+    let originalTop = parseFloat(el.style.top);
+    let originalLeft = parseFloat(el.style.left);
+
+    // Jeśli ekran jest mały (np. mobilny), skaluj pozycję
+    if (window.innerWidth < 768) {
+      el.style.top = `${originalTop * 0.6}px`;
+      el.style.left = `${originalLeft * 0.6}px`;
+    }
+  });
+}
+
+// Wywołaj po załadowaniu strony i przy zmianie strony
+renderEditor();
+adjustDraggablePositions();
+
+window.addEventListener('resize', adjustDraggablePositions);
 </script>
 
 </body>
