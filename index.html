@@ -70,6 +70,8 @@ body {
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  
+  
 }
 
 /* Nagłówek */
@@ -481,6 +483,9 @@ body {
 </head>
 <body>
   <!-- Header with info -->
+  
+
+  
 <div id="header">
 
 
@@ -547,6 +552,34 @@ body {
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
+
+#fullscreen-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 8px 12px;
+  background-color: #495057;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+/* Style dla trybu pełnoekranowego */
+:fullscreen #editor-wrapper {
+  width: 100% !important;
+  margin: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 20px !important;
+  min-height: 100vh !important;
+}
+
+:fullscreen #editor {
+  width: 100% !important;
+  max-width: 100% !important;
+}
 </style>
 
 <div class="alert-banner">
@@ -575,11 +608,11 @@ Please select one of the available tapes. Tapes 2, 5, 6, 7, 8, 11, and 22 are em
         <div id="github-file-list"></div>
       </div>
     </div>
-    
+    	  
     <div id="editor-container">
       <div id="editor-wrapper">
 	  
-	  
+<button id="fullscreen-toggle">🡰🡲 Full Screen</button>
 	  	    
  
 	    <div id="header-info">
@@ -1323,6 +1356,49 @@ choose currently displayed page</div>
   document.getElementById('year').textContent = new Date().getFullYear();
 </script>
 
+
+
+
+
+
+  
+  <script>
+const toggleButton = document.getElementById('fullscreen-toggle');
+const editorContainer = document.getElementById('editor-container'); // Poprawiony selektor
+
+toggleButton.addEventListener('click', () => {
+  if (!document.fullscreenElement) {
+    editorContainer.requestFullscreen().catch(err => {
+      alert(`Błąd próby wejścia w pełny ekran: ${err.message}`);
+    });
+  } else {
+    document.exitFullscreen();
+  }
+});
+
+// Obsługa zmiany trybu pełnoekranowego
+document.addEventListener('fullscreenchange', () => {
+  if (document.fullscreenElement) {
+    toggleButton.textContent = '🞱 Exit full screen';
+    // Dodatkowe style dla trybu pełnoekranowego
+    editorContainer.style.padding = '0';
+    editorContainer.style.margin = '0';
+    document.getElementById('editor-wrapper').style.width = '100%';
+    document.getElementById('editor-wrapper').style.margin = '0';
+  } else {
+    toggleButton.textContent = '🡰🡲 Full screen';
+    // Przywróć domyślne style
+    editorContainer.style.padding = '20px 20px 60px';
+    document.getElementById('editor-wrapper').style.width = '200mm';
+    document.getElementById('editor-wrapper').style.margin = '20px auto 40px';
+  }
+});
+
+// Obsługa błędów
+document.addEventListener('fullscreenerror', (err) => {
+  console.error('Błąd pełnego ekranu:', err);
+});
+</script>
 
 </body>
 
