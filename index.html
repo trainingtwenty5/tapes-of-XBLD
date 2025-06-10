@@ -759,14 +759,30 @@ choose currently displayed page</div>
   }
 </style>
 
+
+<script>
+function closePopupAndRedirect() {
+  // Zamknij popup
+  document.getElementById('mc_modal_overlay').style.display = 'none';
+  
+  // Otwórz nową kartę z linkiem do Udemy
+  window.open(
+  'https://www.udemy.com/course/arcgis-xbld/?referralCode=4358C636EADDAB1A4C69',
+  'UdemyCourse',
+  'width=800,height=600'
+);
+}
+</script>
+
+
 <!-- POPUP MODAL -->
 <div id="mc_modal_overlay">
   <div id="mc_embed_signup">
-    <button id="mc_close_popup" aria-label="Close popup">&times;</button>
-    <h2>Join now and get a bonus with the ArcGIS Experience Builder course!</h2>
+    <button id="mc_close_popup" aria-label="Close popup" onclick="closePopupAndRedirect()">&times;</button>
+
+    <h2>Join the ArcGIS Experience Builder course community!h2>
     <div class="mc-description">
-      Want a <strong>discount code</strong> and a chance to get <strong>free course access</strong>?  
-      Just drop your email below — we regularly gift free codes!
+Subscribe to the newsletter to stay up to date with changes in the course and discover new updates — not only about ArcGIS Experience Builder. I’ll make sure the emails are few, but always interesting.
     </div>
     <form id="mc-embedded-subscribe-form">
       <div class="mc-field-group">
