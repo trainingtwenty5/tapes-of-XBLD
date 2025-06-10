@@ -44,374 +44,429 @@
 <!-- Mailchimp + Popup -->
 <link href="https://cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
   
- <!-- cookie-scrip --> 
-  <script type="text/javascript" charset="UTF-8" src="//cdn.cookie-script.com/s/724adfe6b0a772eeb0a0f0a22f623115.js"></script>
+ <!-- cookie-scrip--> 
+  <script type="text/javascript" charset="UTF-8" src="//cdn.cookie-script.com/s/724adfe6b0a772eeb0a0f0a22f623115.js"></script> 
 
   
   <style>
-    :root {
-      --sidebar-width: 280px;
-      --sidebar-bg: #f8f9fa;
-      --sidebar-border: #dee2e6;
-      --primary-color: #007bff;
-      --secondary-color: #6c757d;
-      --success-color: #28a745;
-      --danger-color: #dc3545;
-      --light-color: #f8f9fa;
-      --dark-color: #343a40;
-    }
-    
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #e9ecef;
-      height: 100vh;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    #header {
-      background-color: var(--dark-color);
-      color: white;
-      padding: 10px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    
-    #header-info {
-      display: flex;
-      gap: 20px;
-    }
-    
-    .info-box {
-      background-color: rgba(255,255,255,0.1);
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-    
-    #main-container {
-      display: flex;
-      height: calc(100vh - 50px);
-      width: 100%;
-      overflow: hidden;
-    }
-    
-    #left-sidebar {
-      width: var(--sidebar-width);
-      background: var(--sidebar-bg);
-      border-right: 1px solid var(--sidebar-border);
-      height: 100%;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .sidebar-section {
-      padding: 15px;
-      border-bottom: 1px solid var(--sidebar-border);
-    }
-    
-    .sidebar-section h3 {
-      margin-top: 0;
-      margin-bottom: 15px;
-      color: var(--dark-color);
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .sidebar-section h3::before {
-      content: "";
-      display: inline-block;
-      width: 4px;
-      height: 16px;
-      background-color: var(--primary-color);
-      border-radius: 2px;
-    }
-    
-    #right-sidebar {
-      width: var(--sidebar-width);
-      background: var(--sidebar-bg);
-      border-left: 1px solid var(--sidebar-border);
-      height: 100%;
-      overflow-y: auto;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    #editor-container {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow: auto;
-      height: 100%;
-      background-color: #e9ecef;
-      padding: 20px;
-    }
-    
-    #editor-wrapper {
-      width: 80%;
-      margin: 0 auto;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
-      background-color: white;
-      min-height: 100%;
-    }
-    
-    #editor {
-      background: white;
-      width: 100%;
-      min-height: 297mm;
-      padding: 40px;
-      font-size: 16px;
-      color: black;
-      position: relative;
-    }
-    
-    .task-btn {
-      background-color: var(--success-color);
-      color: white;
-      border-radius: 6px;
-      padding: 8px 12px;
-      font-size: 14px;
-      cursor: pointer;
-      margin-bottom: 8px;
-      width: 100%;
-      border: none;
-      transition: all 0.2s;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    .task-btn:hover {
-      background-color: #218838;
-      transform: translateY(-1px);
-    }
-    
-    .task-btn::before {
-      content: "📁";
-    }
-    
-    #json-viewer {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 10000;
-      display: none;
-      overflow: auto;
-      padding: 20px;
-      box-sizing: border-box;
-    }
-    
-    #json-content {
-      background: white;
-      padding: 20px;
-      border-radius: 8px;
-      max-width: 800px;
-      margin: 20px auto;
-      font-family: monospace;
-      white-space: pre-wrap;
-      max-height: 80vh;
-      overflow: auto;
-    }
-    
-    #close-json,
-    #copy-json {
-      position: absolute;
-      top: 20px;
-      background: var(--danger-color);
-      color: white;
-      border: none;
-      border-radius: 4px;
-      padding: 10px 15px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    
-    #copy-json { 
-      right: 120px;
-      background: var(--primary-color);
-    }
-    
-    #close-json:hover, #copy-json:hover {
-      opacity: 0.9;
-      transform: translateY(-1px);
-    }
-    
-    .section-title {
-      font-size: 24px;
-      color: #003366;
-      margin-bottom: 15px;
-      font-weight: 600;
-    }
-    
-    .subsection-title {
-      font-size: 18px;
-      color: var(--primary-color);
-      margin-bottom: 12px;
-      font-weight: 500;
-    }
-    
-    .draggable,
-    .text-block {
-      position: absolute;
-      user-select: none;
-      cursor: move;
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 14px;
-    }
-    
-    .draggable {
-      background: var(--danger-color);
-      color: white;
-      font-weight: bold;
-    }
-    
-    .text-block {
-      background: white;
-      border: 1px dashed #adb5bd;
-      text-align: justify;
-      max-width: 80%;
-      background-color: #f8f9fa;
-    }
-    
-    .page-item {
-      padding: 10px 15px;
-      margin: 4px 0;
-      background: white;
-      cursor: pointer;
-      border-radius: 6px;
-      border-left: 3px solid transparent;
-      transition: all 0.2s;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-    }
-    
-    .page-item:hover {
-      background-color: #f1f3f5;
-    }
-    
-    .page-item.active {
-      background-color: var(--primary-color);
-      color: white;
-      border-left-color: var(--dark-color);
-    }
-    
-    .image-container {
-      position: absolute;
-      cursor: move;
-      border-radius: 8px;
-      overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-      border: 1px solid #dee2e6;
-    }
-    
-    .image-container img {
-      max-width: 100%;
-      max-height: 100%;
-      display: block;
-      object-fit: contain;
-    }
-    
-    /* Scrollbar styling */
-    ::-webkit-scrollbar {
-      width: 8px;
-      height: 8px;
-    }
-    
-    ::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
-    
-    ::-webkit-scrollbar-thumb {
-      background: #c1c1c1;
-      border-radius: 4px;
-    }
-    
-    ::-webkit-scrollbar-thumb:hover {
-      background: #a8a8a8;
-    }
-	
-	
-	
-	
-	
-	
-	
-	
-	/* Reset list style i marginesy */
-#header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #2c3e50;
-  color: #ecf0f1;
-  padding: 10px 20px;
+:root {
+  --sidebar-width: 280px;
+  --sidebar-bg: #f8f9fa;
+  --sidebar-border: #dee2e6;
+  --primary-color: #007bff;
+  --secondary-color: #6c757d;
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+  --light-color: #f8f9fa;
+  --dark-color: #343a40;
+}
+
+body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  background-color: #e9ecef;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
-#header > div:first-child {
-  font-weight: 600;
-  flex-shrink: 0;
-  margin-right: 40px;
+/* Nagłówek */
+#header {
+  background-color: #003366; /* ciemnoniebieski */
+  color: white;
+  padding: 15px 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Styl dla listy nawigacji */
+#header h1 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0;
+  letter-spacing: 1px;
+  color: #fffdd0; /* złotawy kolor tekstu */
+}
+
 #header ul {
   list-style: none;
   display: flex;
   margin: 0;
   padding: 0;
-  flex-grow: 1;
 }
 
-/* Elementy menu */
-.header__nav-item {
-  margin-right: 25px;
-}
-
-/* Linki w menu */
 .header__nav-item a {
   color: #ecf0f1;
   text-decoration: none;
-  padding: 6px 10px;
+  padding: 8px 12px;
   border-radius: 4px;
   transition: background-color 0.3s, color 0.3s;
+  font-weight: 500;
 }
 
 .header__nav-item a:hover,
 .header__nav-item a:focus {
-  background-color: #3498db;
-  color: white;
-  outline: none;
+  background-color: white;
+  color: black;
 }
 
-/* Kontener z info po prawej */
+
+
+
+
+
+
 #header-info {
   display: flex;
   gap: 15px;
   flex-shrink: 0;
 }
 
-/* Styl pojedynczego info-box */
 .info-box {
-  background-color: #34495e;
-  padding: 6px 12px;
-  border-radius: 5px;
+
+  background-color: black;
+  color: white;
+  
+
+  border-radius: 6px;
+  padding: 8px 12px;
   font-size: 14px;
-  color: #bdc3c7;
+  cursor: pointer;
+  margin-bottom: 8px;
   white-space: nowrap;
+  border: 2px solid black;
+  transition: all 0.2s;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  
+}
+
+.alert-banner {
+  background-color: #ff4d4d;
+  color: #000;
+  padding: 10px 20px;
+  font-size: 14px;
+  text-align: center;
+  border-bottom: 2px solid #b30000;
+}
+
+.alert-banner a {
+  color: #000;
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.banner {
+  background-color: #fff8b3;
+  color: #333;
+  padding: 16px 24px;
+  border: 1px solid #ffe066;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+/* Główny kontener - ułożenie elementów w jednej linii */
+#main-container {
+  display: flex;
+  flex-direction: row; /* wszystko w jednej linii */
+  height: calc(100vh - 50px); /* wysokość minus nagłówek */
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Lewy panel z listą zadań */
+#left-sidebar {
+  order: 0;
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  border-right: 1px solid var(--sidebar-border);
+  height: 100%;
+  overflow-y: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-section {
+  padding: 15px;
+  border-bottom: 1px solid var(--sidebar-border);
+}
+
+.sidebar-section h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: var(--dark-color);
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sidebar-section h3::before {
+  content: "";
+  display: inline-block;
+  width: 4px;
+  height: 16px;
+  background-color: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* Panel z treścią edytora */
+#editor-container {
+  order: 2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
+  background-color: #e9ecef;
+  padding: 20px;
+}
+
+/* Styl pod A4 */
+#editor-wrapper {
+  width: 210mm;
+  margin: 20px auto;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  background-color: white;
+  min-height: 297mm;
+  padding: 30px;
+  border: 2px solid #ccc;
+}
+
+#editor {
+  background: white;
+  width: 210mm;
+  margin: 20px auto;
+
+  font-size: 16px;
+  color: black;
+  position: relative;
+}
+
+/* Prawy panel (strony) - teraz jest obok lewego paska */
+#right-sidebar {
+  order: 1;
+  width: var(--sidebar-width);
+  background: var(--sidebar-bg);
+  border-left: 1px solid var(--sidebar-border);
+  height: 100%;
+  overflow-y: auto;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  position: sticky;
+  top: 0px; /* dopasowane do wysokości nagłówka */
+  left: var(--sidebar-width); /* przyklejone tuż za lewym panelem */
+  z-index: 5;
+}
+
+/* Styli dla elementów listy stron */
+.page-item {
+  padding: 10px 15px;
+  margin: 4px 0;
+
+  background-color: white;
+  color: black;
+  border-radius: 6px;
+
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 8px;
+
+  border: 2px solid black;
+  transition: all 0.2s;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-item:hover {
+  background-color: black;
+  color: white;
+}
+
+.page-item.active {
+  background-color: black;
+  color: white;
+}
+
+
+	
+
+
+
+
+.task-btn {
+  background-color: white;
+  color: black;
+  border-radius: 6px;
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-bottom: 8px;
+  width: 100%;
+  border: 2px solid black;
+  transition: all 0.2s;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.task-btn:hover {
+  background-color: black;
+  color: white;
+}
+
+/* Wybrany stan */
+.task-btn.selected {
+  background-color: black;
+  color: white;
+}
+
+.task-btn.active {
+
+  background-color: black;
+  color: white;
+}
+
+
+
+.task-btn::before {
+  content: "📁";
+}
+
+#json-viewer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 10000;
+  display: none;
+  overflow: auto;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+#json-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 20px auto;
+  font-family: monospace;
+  white-space: pre-wrap;
+  max-height: 80vh;
+  overflow: auto;
+}
+
+#close-json,
+#copy-json {
+  position: absolute;
+  top: 20px;
+  background: var(--danger-color);
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+#copy-json { 
+  right: 120px;
+  background: var(--primary-color);
+}
+
+#close-json:hover, #copy-json:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.section-title {
+  font-size: 24px;
+  color: #003366;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.subsection-title {
+  font-size: 18px;
+  color: var(--primary-color);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.draggable,
+.text-block {
+  position: absolute;
+  user-select: none;
+  cursor: move;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.draggable {
+  background: var(--danger-color);
+  color: white;
+  font-weight: bold;
+}
+
+.text-block {
+  background: white;
+  border: 1px dashed #adb5bd;
+  text-align: justify;
+  max-width: 80%;
+  background-color: #f8f9fa;
+}
+
+.image-container {
+  position: absolute;
+  cursor: move;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border: 1px solid #dee2e6;
+}
+
+.image-container img {
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
 
   </style>
@@ -420,7 +475,20 @@
   <!-- Header with info -->
 <div id="header">
 
+
+
+
+
   <ul>
+  
+
+
+    <!-- Logo -->
+    <li style="color: white; font-size: 18px; font-weight: bold; margin-right: 30px;">
+      <a style="text-decoration: none; color: white;" href="https://trainingtwenty5.github.io/tapes-of-XBLD/"  target="_self">E-learning Training25</a>
+    </li>
+
+
     <li class="header__nav-item">
       <a href="https://training25.thinkific.com/#why" target="_self">Why Training 25</a>
     </li>
@@ -440,10 +508,7 @@
       <a href="https://training25.thinkific.com/#foot" target="_self">Contact</a>
     </li>
   </ul>
-  <div id="header-info">
-    <div class="info-box" id="current-task-info">Task: Not selected</div>
-    <div class="info-box" id="current-page-info">Page: Not selected</div>
-  </div>
+
 </div>
 
 <style>
@@ -487,6 +552,9 @@
 
   <!-- Main interface -->
   <div id="main-container">
+  
+  
+  
     <div id="left-sidebar">
       <div class="sidebar-section">
         <h3>Load Tape</h3>
@@ -494,22 +562,44 @@
 Please select one of the available tapes. Tapes 2, 5, 6, 7, 8, 11, and 22 are empty and not ready for use. Others work fine.
 </div>
 <br>
+
+
         <div id="github-file-list"></div>
       </div>
     </div>
     
     <div id="editor-container">
       <div id="editor-wrapper">
-        <div id="editor"></div>
+	  
+	  
+	  	    
+ 
+	    <div id="header-info">
+    <div class="info-box" id="current-task-info">Task: Select tape to load</div>
+    <div class="info-box" id="current-page-info">Page: Not selected</div>
+	  </div>
+	  
+	    <div id="editor">
+		
+
+		</div>
+
+   </div>
+  
+  
       </div>
-    </div>
+
     
+	
+	
+	
     <div id="right-sidebar">
       <div class="sidebar-section">
+	   <h3>Pages</h3>
 	  		<div class="banner">
-Each tape has its own set of dedicated pages. Please select a page to proceed to the next one.</div>
+choose currently displayed page</div>
 <br>
-        <h3>Pages</h3>
+       
         <div id="pageList"></div>
       </div>
     </div>
@@ -999,8 +1089,6 @@ Each tape has its own set of dedicated pages. Please select a page to proceed to
     }
   </script>
   
-
-
 
 
 
