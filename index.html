@@ -4,7 +4,8 @@
   <!-- Favicons -->
   <link rel="apple-touch-icon" href="https://import.cdn.thinkific.com/1010971%2Fcustom_site_themes%2Fid%2F4U3mAE1bTTuIDVWOhdRH_DA533D79-F0EB-45D5-B432-912914136A55.png">
   <link rel="icon" href="https://import.cdn.thinkific.com/1010971%2Fcustom_site_themes%2Fid%2F4U3mAE1bTTuIDVWOhdRH_DA533D79-F0EB-45D5-B432-912914136A55.png">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 
 
@@ -819,7 +820,7 @@ body {
 
 
 
-
+<!--
 
 /* Responsywność */
 @media (max-width: 1200px) {
@@ -945,6 +946,107 @@ body {
 
 
 
+-->
+
+@media (max-width: 768px) {
+  /* Ukryj całą resztę strony oprócz nagłówka i komunikatu */
+  body > *:not(#header):not(.mobile-warning):not(.footer):not(#cookie-banner) {
+    display: none !important;
+  }
+
+  /* Nagłówek - odpowiednio stylizowany */
+  #header {
+    position: static !important;
+    background-color: #003366;
+    color: white;
+    padding: 20px 15px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  }
+
+  #header h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0;
+    letter-spacing: 1px;
+    color: #fffdd0; /* złotawy kolor tekstu */
+  }
+
+  #header ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 15px;
+    padding: 0;
+    gap: 8px;
+  }
+
+  .header__nav-item a {
+    display: block;
+    text-align: center;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+  }
+
+  /* Komunikat ostrzegawczy */
+  .mobile-warning {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+   
+    padding: 0px;
+    background-color: white;
+    color: black;
+    text-align: left;
+    font-size: 16px;
+    font-weight: normal; /* usuń pogrubienie */
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    position: relative;
+    top: 0px; /* poza nagłówkiem */
+    left: 0;
+    right: 0;
+    z-index: 999;
+  }
+
+  .mobile-warning .warning-icon {
+    font-size: 24px;
+    color: orange;
+    margin-right: 10px;
+  }
+
+  /* Stopka */
+  .footer {
+    display: block !important;
+    width: 100%;
+    padding: 15px 20px;
+    background-color: black !important;
+    color: white !important;
+    text-align: center;
+    font-size: 13px;
+  }
+
+  .footer__copyright {
+    margin: 0;
+	padding: 10px;
+    font-size: 12px;
+  }
+  
+  .footer__container {
+  padding: 10px;
+  }
+
+  /* Cookie Banner */
+
+}
 
 
 
@@ -1120,6 +1222,12 @@ body {
   </ul>
 
 </div>
+
+<div class="mobile-warning">
+  <span class="warning-icon">⚠️</span>
+  This page is not optimized for mobile devices. For best experience, please use a desktop computer.
+</div>
+  
 
 
 <div class="alert-banner">
@@ -1639,7 +1747,7 @@ window.onload = function () {
 
 <!-- Cookie Banner -->
 <div id="cookie-banner">
-  <p>We use cookies to ensure you get the best experience on our website. By clicking "Accept", you agree to our use of cookies in accordance with our <a href="https://beggars.com/cookiepolicy/" target="_blank">Cookie Policy</a>.</p>
+  <p>We use cookies to ensure you get the best experience on our website. By clicking "Accept", you agree to our use of cookies in accordance with our <a href="https://beggars.com/cookiepolicy/"  target="_blank" style="color: #fff8b3;">Cookie Policy</a>.</p>
   <button id="accept-cookies">Accept</button>
 </div>
 
@@ -1670,31 +1778,6 @@ window.onload = function () {
     </div>
   </div>
 </footer>
-
-<script>
-  // Check if cookies were already accepted
-  if(document.cookie.includes('cookies_accepted=true')) {
-    document.getElementById('cookie-banner').style.display = 'none';
-  }
-
-  // Handle cookie acceptance
-  document.getElementById('accept-cookies').addEventListener('click', function() {
-    // Set cookie for 30 days
-    const date = new Date();
-    date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000));
-    document.cookie = `cookies_accepted=true; expires=${date.toUTCString()}; path=/`;
-    
-    // Hide banner
-    document.getElementById('cookie-banner').style.display = 'none';
-  });
-
-  // Update year in footer
-  document.getElementById('year').textContent = new Date().getFullYear();
-</script>
-
-
-
-
 
 
   
@@ -1737,8 +1820,48 @@ document.addEventListener('fullscreenerror', (err) => {
 
 
 
-
 </script>
+
+
+
+
+<script>
+  // Funkcja sprawdzająca ciasteczko
+  function checkCookieAccepted() {
+    const isAccepted = document.cookie.includes('cookies_accepted=true');
+    const banner = document.getElementById('cookie-banner');
+    if (isAccepted && banner) {
+      banner.style.display = 'none';
+    }
+  }
+
+  // Funkcja ustawiająca ciasteczko i chowająca banner
+  function setupCookieBanner() {
+    const banner = document.getElementById('cookie-banner');
+    const acceptBtn = document.getElementById('accept-cookies');
+
+    if (!acceptBtn) return;
+
+    acceptBtn.addEventListener('click', function () {
+      const date = new Date();
+      date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000)); // 30 dni
+      document.cookie = `cookies_accepted=true; expires=${date.toUTCString()}; path=/`;
+      if (banner) {
+        banner.style.display = 'none';
+      }
+    });
+  }
+
+  // Uruchomienie funkcji
+  window.addEventListener('load', () => {
+    checkCookieAccepted();
+    setupCookieBanner();
+  });
+
+  // Dodatkowo po zmianie rozmiaru ekranu
+  window.addEventListener('resize', checkCookieAccepted);
+</script>
+
 
 </body>
 
