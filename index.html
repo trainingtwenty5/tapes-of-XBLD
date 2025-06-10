@@ -44,8 +44,8 @@
 <!-- Mailchimp + Popup -->
 <link href="https://cdn-images.mailchimp.com/embedcode/classic-061523.css" rel="stylesheet" type="text/css">
   
- <!-- cookie-scrip--> 
-  <script type="text/javascript" charset="UTF-8" src="//cdn.cookie-script.com/s/724adfe6b0a772eeb0a0f0a22f623115.js"></script> 
+ <!-- cookie-scrip
+  <script type="text/javascript" charset="UTF-8" src="//cdn.cookie-script.com/s/724adfe6b0a772eeb0a0f0a22f623115.js"></script> --> 
 
   
   <style>
@@ -227,32 +227,40 @@ body {
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-items: center;
   overflow: auto;
   height: 100%;
   background-color: #e9ecef;
-  padding: 20px;
+  padding: 20px 20px 60px; /* większy padding na dole */
+  position: relative;
 }
 
 /* Styl pod A4 */
 #editor-wrapper {
-  width: 210mm;
-  margin: 20px auto;
+  width: 200mm;
+  margin: 20px auto 40px; /* większy margin na dole */
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
   background-color: white;
   min-height: 297mm;
-  padding: 30px;
+  padding: 30px; /* większy padding wewnątrz */
   border: 2px solid #ccc;
+  position: relative;
 }
 
 #editor {
   background: white;
   width: 210mm;
-  margin: 20px auto;
-
+  margin: 0 auto;
   font-size: 16px;
   color: black;
   position: relative;
+
+ 
 }
+
+
+
+
 
 /* Prawy panel (strony) - teraz jest obok lewego paska */
 #right-sidebar {
@@ -1094,9 +1102,226 @@ choose currently displayed page</div>
 
 
 
+<style>
+  /* Cookie Banner Styles */
+  #cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #003366;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 -2px 10px rgba(0,0,0,0.2);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  #cookie-banner p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.4;
+    max-width: 85%;
+  }
+  
+  #cookie-banner a {
+    color: #fff8b3;
+    text-decoration: underline;
+    transition: color 0.3s;
+  }
+  
+  #cookie-banner a:hover {
+    color: white;
+  }
+  
+  #accept-cookies {
+    background: #fff8b3;
+    color: #003366;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+    white-space: nowrap;
+    font-size: 14px;
+  }
+  
+  #accept-cookies:hover {
+    background: white;
+    transform: translateY(-1px);
+  }
 
+  /* Footer Styles */
+  .footer {
+    background-color: #000;
+    color: #fff;
+    padding: 25px 0 15px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin-top: auto;
+  }
+  
+  .footer__container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .footer__content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    margin-bottom: 20px;
+  }
+  
+  .footer__nav-site {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px 25px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer__nav-item a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+  }
+  
+  .footer__nav-item a:hover {
+    color: rgb(3, 178, 199);
+  }
+  
+  .footer__contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .footer__contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .footer__contact-label {
+    font-weight: 500;
+    margin-right: 5px;
+    color: #fff;
+    font-size: 14px;
+  }
+  
+  .footer__contact a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-size: 14px;
+  }
+  
+  .footer__contact a:hover {
+    color: rgb(3, 178, 199);
+  }
+  
+  .footer__copyright {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 13px;
+    color: rgba(255,255,255,0.7);
+  }
+  
+  @media (max-width: 768px) {
+    #cookie-banner {
+      flex-direction: column;
+      text-align: center;
+      gap: 15px;
+      padding: 15px;
+    }
+    
+    #cookie-banner p {
+      max-width: 100%;
+    }
+    
+    .footer__content {
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    .footer__nav-site {
+      justify-content: center;
+    }
+    
+    .footer__contact-info {
+      align-items: center;
+      text-align: center;
+    }
+  }
+</style>
 
+<!-- Cookie Banner -->
+<div id="cookie-banner">
+  <p>We use cookies to ensure you get the best experience on our website. By clicking "Accept", you agree to our use of cookies in accordance with our <a href="https://beggars.com/cookiepolicy/" target="_blank">Cookie Policy</a>.</p>
+  <button id="accept-cookies">Accept</button>
+</div>
 
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer__container">
+    <div class="footer__content">
+      <ul class="footer__nav-site">
+        <li class="footer__nav-item"><a href="https://trainingtwenty5.github.io/tapes-of-XBLD/">Home</a></li>
+        <li class="footer__nav-item"><a href="https://training25.thinkific.com/#why">Why Training 25</a></li>
+        <li class="footer__nav-item"><a href="https://training25.thinkific.com/pages/Lecture-Plan">Our product</a></li>
+        <li class="footer__nav-item"><a href="https://www.udemy.com/course/arcgis-xbld/?referralCode=4358C636EADDAB1A4C69">Get Started</a></li>
+        <li class="footer__nav-item"><a href="https://training25.thinkific.com/#FAQ">FAQ</a></li>
+        <li class="footer__nav-item"><a href="https://training25.thinkific.com/#about">About</a></li>
+        <li class="footer__nav-item"><a href="https://training25.thinkific.com/#foot">Contact</a></li>
+      </ul>
+      <div class="footer__contact-info">
+        <div class="footer__contact-details">
+          <div class="footer__contact">
+            <span class="footer__contact-label">Email:</span>
+            <a href="mailto:DanielBuchar@training25.pl">DanielBuchar@training25.pl</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer__copyright">
+      &copy; <span id="year"></span> Training25. All rights reserved.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Check if cookies were already accepted
+  if(document.cookie.includes('cookies_accepted=true')) {
+    document.getElementById('cookie-banner').style.display = 'none';
+  }
+
+  // Handle cookie acceptance
+  document.getElementById('accept-cookies').addEventListener('click', function() {
+    // Set cookie for 30 days
+    const date = new Date();
+    date.setTime(date.getTime() + (30 * 24 * 60 * 60 * 1000));
+    document.cookie = `cookies_accepted=true; expires=${date.toUTCString()}; path=/`;
+    
+    // Hide banner
+    document.getElementById('cookie-banner').style.display = 'none';
+  });
+
+  // Update year in footer
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
 
 
 </body>
