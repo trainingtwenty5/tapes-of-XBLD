@@ -949,8 +949,8 @@ body {
 -->
 
 @media (max-width: 768px) {
-  /* Ukryj całą resztę strony oprócz nagłówka i komunikatu */
-  body > *:not(#header):not(.mobile-warning):not(.footer):not(#cookie-banner) {
+  /* Ukryj wszystko oprócz elementów z klasą .keep-on-mobile */
+  body > *:not(.keep-on-mobile) {
     display: none !important;
   }
 
@@ -1044,12 +1044,38 @@ body {
   padding: 10px;
   }
 
-  /* Cookie Banner */
+
 
 }
 
 
+@media (max-width: 768px) {
+  #mc_modal_overlay {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 99999 !important;
+  }
 
+  #mc_embed_signup {
+    max-width: 95% !important;
+    width: 95% !important;
+    padding: 20px !important;
+    font-size: 14px !important;
+  }
+
+  #mc_close_popup {
+    font-size: 24px !important;
+    top: 10px !important;
+    right: 10px !important;
+  }
+}
 
 
 
@@ -1223,10 +1249,11 @@ body {
 
 </div>
 
+<!--
 <div class="mobile-warning">
   <span class="warning-icon">⚠️</span>
   This page is not optimized for mobile devices. For best experience, please use a desktop computer.
-</div>
+</div>-->
   
 
 
@@ -1860,6 +1887,9 @@ document.addEventListener('fullscreenerror', (err) => {
 
   // Dodatkowo po zmianie rozmiaru ekranu
   window.addEventListener('resize', checkCookieAccepted);
+  
+  
+  
 </script>
 
 
